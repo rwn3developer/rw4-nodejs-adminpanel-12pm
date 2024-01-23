@@ -6,6 +6,8 @@ const passport = require('passport');
 
 const authcontroller = require('../controllers/AuthConteroller');
 const categorycontroller = require('../controllers/CategoryController');
+const subcategorycontroller = require('../controllers/SubcategoryController');
+
 
 
 
@@ -31,13 +33,11 @@ routes.get('/logout',authcontroller.userLogout);
 
 
 //category
-
 routes.get('/category',passport.checkUser,categorycontroller.category);
 routes.get('/addcategory',passport.checkUser,categorycontroller.addCategory)
 routes.post('/postCategory',passport.checkUser,categorycontroller.postCategory);
 routes.get('/deletecategory/:id',passport.checkUser,categorycontroller.categoryDelete)
 routes.get('/editcategory',passport.checkUser,categorycontroller.categoryEdit);
-
 
 
 //maliler
@@ -46,6 +46,12 @@ routes.get('/otp',authcontroller.otp);
 routes.post('/postOtp',authcontroller.postOtp);
 routes.get('/newpassword',authcontroller.newpassword);
 routes.post('/postNewpassword',authcontroller.postNewpassword);
+
+
+//subcategory
+routes.get('/subcategory',passport.checkUser,subcategorycontroller.subcategory)
+routes.get('/addsubcategory',passport.checkUser,subcategorycontroller.addsubcategory);
+routes.post('/postSubCategory',passport.checkUser,subcategorycontroller.postSubCategory);
 
 
 
