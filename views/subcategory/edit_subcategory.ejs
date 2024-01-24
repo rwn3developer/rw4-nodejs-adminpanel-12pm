@@ -32,46 +32,56 @@
       <!-- Start Page Content -->
       <!-- ============================================================== -->
       <div class="row">
-        <div class="col-12">
+        <div class="col-md-6">
           <div class="card">
-            <div class="card-body">
-            <a href="/addsubcategory" class="btn btn-primary">Add</a>
-              <h5 class="card-title mt-3">View subcategory</h5>
-            </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Subcategory</th>
+            <form method="post" action="/postEditSubCategory" class="form-horizontal">
+                <input type="hidden" name="editid" value="<%= single.id %>"/>
+              <div class="card-body">
+                <h4 class="card-title">Edit Subcategory</h4>
+                <div class="form-group row">
+                  <label
+                    for="fname"
+                    class="col-sm-3 text-end control-label col-form-label"
+                    >Category</label
+                  >
+                  <div class="col-sm-9">
+                        <select name="category" class="form-control">
+                            <option>---select category---</option>
+                            <% category.map((cat)=>{ %>
+                                <option <% if(cat.category_name == single.categoryId.category_name) { %> selected  <% } %> value="<%= cat.id %>"><%= cat.category_name %></option>
+                            <% }) %>
+                        </select>
+                  </div>
+                </div>
 
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <% subcategory.map((subcate,i) => {i=i+1 %>
-                    <tr>
-                        <th scope="row"><%= i %></th>
-                        <td><%= subcate.categoryId.category_name %></td>
-                        <td><%= subcate.subcategory %></td>
-
-                        <td></td>
-                        <td>
-                            <a href="/deletesubcategory/<%= subcate.id %>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            <a href="/editsubcategory?id=<%= subcate.id %>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                        </td>
-                      </tr>
-                <% }) %>
+                <div class="form-group row">
+                    <label
+                      for="fname"
+                      class="col-sm-3 text-end control-label col-form-label"
+                      >Subcategory</label
+                    >
+                    <div class="col-sm-9">
+                          <input type="text" class="form-control" name="subcategory" value="<%= single.subcategory %>">
+                    </div>
+                  </div>
                 
-              </tbody>
-            </table>
+              </div>
+              <div class="border-top">
+                <div class="card-body">
+                  <button type="submit" class="btn btn-primary">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
          
          
         </div>
+       
       </div>
+      <!-- editor -->
+     
       <!-- ============================================================== -->
       <!-- End PAge Content -->
       <!-- ============================================================== -->

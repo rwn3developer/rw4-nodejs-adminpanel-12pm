@@ -52,6 +52,12 @@ routes.post('/postNewpassword',authcontroller.postNewpassword);
 routes.get('/subcategory',passport.checkUser,subcategorycontroller.subcategory)
 routes.get('/addsubcategory',passport.checkUser,subcategorycontroller.addsubcategory);
 routes.post('/postSubCategory',passport.checkUser,subcategorycontroller.postSubCategory);
+routes.get('/deletesubcategory/:id',passport.checkUser,subcategorycontroller.deletesubcategory);
+routes.get('/editsubcategory',passport.checkUser,subcategorycontroller.editsubcategory);
+routes.post('/postEditSubCategory',passport.checkUser,subcategorycontroller.postEditSubCategory);
+
+
+
 
 
 
