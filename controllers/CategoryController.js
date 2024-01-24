@@ -1,4 +1,5 @@
 const categoryModel = require('../models/categoryModel');
+const subcategoryModel= require('../models/subcategoryModel');
 
 const category = async(req,res) => {
     try{
@@ -32,7 +33,15 @@ const postCategory = async(req,res) => {
 const categoryDelete = async(req,res) => {
     try{
         let id= req.params.id;
-        let deleteCategory = await categoryModel.findByIdAndDelete(id);
+
+        //find category
+        let category = await categoryModel.findById(id);
+        if(!category){
+            console.log("record not fetch");
+            return res.redirect('back');
+        }
+        let categoryDelete = await categoryModel.findByIdAndDelete(id);
+        const deletedSubcategories = await subcategoryModel.deleteMany({ categoryId: id });
         console.log("Category delete");
         return res.redirect('back');
     }catch(err){
