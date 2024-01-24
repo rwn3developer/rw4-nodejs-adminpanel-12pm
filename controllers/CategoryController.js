@@ -41,6 +41,7 @@ const categoryDelete = async(req,res) => {
             return res.redirect('back');
         }
         let categoryDelete = await categoryModel.findByIdAndDelete(id);
+        //category wise record delete in subcategory table
         const deletedSubcategories = await subcategoryModel.deleteMany({ categoryId: id });
         console.log("Category delete");
         return res.redirect('back');
