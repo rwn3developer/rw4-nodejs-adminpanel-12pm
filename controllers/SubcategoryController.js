@@ -1,5 +1,7 @@
 const categoryModel = require('../models/categoryModel');
 const subcategoryModel = require('../models/subcategoryModel');
+const exsubcategoryModel = require('../models/exsubcategoryModel');
+
 
 
 const subcategory = async(req,res) => {
@@ -43,6 +45,10 @@ const postSubCategory = async(req,res) => {
 const deletesubcategory = async(req,res) => {
     try{
         await subcategoryModel.findByIdAndDelete(req.params.id);
+
+        //subcategory wise record delete in exsubcategory table
+        //subcategory primary id and exsubcategory foreign key
+        await exsubcategoryModel.deleteMany({ subcategoryId: req.params.id });
         console.log("Subcategory deelete");
         return res.redirect('back');
     }catch(err){
