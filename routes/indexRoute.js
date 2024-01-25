@@ -7,6 +7,8 @@ const passport = require('passport');
 const authcontroller = require('../controllers/AuthConteroller');
 const categorycontroller = require('../controllers/CategoryController');
 const subcategorycontroller = require('../controllers/SubcategoryController');
+const exsubcategorycontroller = require('../controllers/ExsubcategoryController');
+
 
 
 
@@ -57,7 +59,10 @@ routes.get('/editsubcategory',passport.checkUser,subcategorycontroller.editsubca
 routes.post('/postEditSubCategory',passport.checkUser,subcategorycontroller.postEditSubCategory);
 
 
-
+//exsubcategory
+routes.get('/exsubcategory',passport.checkUser,exsubcategorycontroller.exsubcategory);
+routes.get('/addexsubcategory',passport.checkUser,exsubcategorycontroller.addexsubcategory);
+routes.post('/postExSubCategory',passport.checkUser,exsubcategorycontroller.postExSubCategory);
 
 
 
