@@ -4,10 +4,26 @@ const routes = express.Router();
 
 const passport = require('passport');
 
+const multer = require('multer');
+
 const authcontroller = require('../controllers/AuthConteroller');
 const categorycontroller = require('../controllers/CategoryController');
 const subcategorycontroller = require('../controllers/SubcategoryController');
 const exsubcategorycontroller = require('../controllers/ExsubcategoryController');
+const productcontroller = require('../controllers/ProductController');
+
+
+//file upload product
+const storage = multer.diskStorage({
+    destination : (req,file,cb) => {
+        cb(null,"uploads");
+    },
+    filename : (req,file,cb) => {
+        cb(null,Date.now()+"-"+file.originalname);
+    }
+})
+
+const productFile = multer({storage : storage}).single('product_image');
 
 
 
@@ -63,6 +79,14 @@ routes.post('/postEditSubCategory',passport.checkUser,subcategorycontroller.post
 routes.get('/exsubcategory',passport.checkUser,exsubcategorycontroller.exsubcategory);
 routes.get('/addexsubcategory',passport.checkUser,exsubcategorycontroller.addexsubcategory);
 routes.post('/postExSubCategory',passport.checkUser,exsubcategorycontroller.postExSubCategory);
+
+
+
+//product
+routes.get('/product',passport.checkUser,productcontroller.product);
+routes.get('/addproduct',passport.checkUser,productcontroller.addproduct);
+routes.post('/postProduct',productFile,passport.checkUser,productcontroller.postProduct);
+
 
 
 
