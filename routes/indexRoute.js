@@ -12,6 +12,10 @@ const subcategorycontroller = require('../controllers/SubcategoryController');
 const exsubcategorycontroller = require('../controllers/ExsubcategoryController');
 const productcontroller = require('../controllers/ProductController');
 
+//frontend
+
+const homecontroller = require('../controllers/Frontend/HomeController');
+
 
 //file upload product
 const storage = multer.diskStorage({
@@ -29,7 +33,7 @@ const productFile = multer({storage : storage}).single('product_image');
 
 
 
-routes.get('/',authcontroller.login)
+routes.get('/admin',authcontroller.login)
 routes.get('/register',authcontroller.register)
 
 //register form post record
@@ -88,6 +92,7 @@ routes.get('/addproduct',passport.checkUser,productcontroller.addproduct);
 routes.post('/postProduct',productFile,passport.checkUser,productcontroller.postProduct);
 
 
+routes.get('/',homecontroller.index);
 
 
 

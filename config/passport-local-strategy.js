@@ -9,7 +9,7 @@ passport.use(new passportLocal({
 },async(email,password,done)=>{
     try{
         let user = await userModel.findOne({email : email});
-        if(!user || user.password != password){
+        if(!user || user.password != password || user.role == 0){
             console.log("username and password invalid");
             return done(null,false)
         }
@@ -37,7 +37,7 @@ passport.checkUser = (req,res,next) => {
     if(req.isAuthenticated()){
         return next();
     }
-    return res.redirect('/');  
+    return res.redirect('/admin');  
 }
 
 passport.setUser = (req,res,next) => {
