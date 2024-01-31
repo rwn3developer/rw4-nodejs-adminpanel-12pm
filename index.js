@@ -8,7 +8,10 @@ const path = require('path');
 
 const cookieParser = require('cookie-parser');
 
+const flash = require('connect-flash'); 
+
 app.set('view engine','ejs');
+
 const db = require('./config/db');
 
 const passport = require('passport');
@@ -25,11 +28,20 @@ app.use(session({
     }
 }))
 
+app.use(flash());
+
+//connect flash
+app.use(function(req, res, next){
+    res.locals.message = req.flash();
+    next();
+});
+
 app.use(express.static(path.join(__dirname,'public'))); 
 app.use(express.static(path.join(__dirname,'public/front'))); 
 
 
 app.use(cookieParser());
+
 
 app.use(express.urlencoded());
 

@@ -33,8 +33,8 @@ const registerUser = async(req,res) => {
                     email : email,
                     password : password
             })
-            console.log("user register");
-            return res.redirect('/');
+            req.flash('success', 'User register')
+            return res.redirect('/register');
         }else{
             console.log("password or confirm password not same");
             return res.redirect('back');

@@ -60,6 +60,9 @@ routes.get('/addcategory',passport.checkUser,categorycontroller.addCategory)
 routes.post('/postCategory',passport.checkUser,categorycontroller.postCategory);
 routes.get('/deletecategory/:id',passport.checkUser,categorycontroller.categoryDelete)
 routes.get('/editcategory',passport.checkUser,categorycontroller.categoryEdit);
+routes.get('/categoryInstockStatus',passport.checkUser,categorycontroller.categoryInstockStatus);
+routes.get('/categoryOutstockStatus',passport.checkUser,categorycontroller.categoryOutstockStatus);
+
 
 
 //maliler

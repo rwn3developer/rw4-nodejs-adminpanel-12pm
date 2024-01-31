@@ -1,6 +1,7 @@
 const categoryModel = require('../models/categoryModel');
 const subcategoryModel= require('../models/subcategoryModel');
 const exsubcategoryModel= require('../models/exsubcategoryModel');
+const { route } = require('../routes/indexRoute');
 
 
 const category = async(req,res) => {
@@ -67,9 +68,37 @@ const categoryEdit = async(req,res) => {
     }
 }
 
+//outstock status
+const categoryInstockStatus = async(req,res) => {
+    try{
+        let catstatus = await categoryModel.findByIdAndUpdate(req.query.id,{
+            status : 0
+        })
+        req.flash('success',"category status updated!")
+        return res.redirect('back');
+    }catch(err){
+        console.log(err);
+        return false;
+    }
+}
+
+//instock status
+const categoryOutstockStatus = async(req,res) => {
+    try{
+        let catstatus = await categoryModel.findByIdAndUpdate(req.query.id,{
+            status : 1
+        })
+        req.flash('success',"category status updated!")
+        return res.redirect('back');
+    }catch(err){
+        console.log(err);
+        return false;
+    }
+}
+
 
 
 module.exports = {
     category,addCategory,postCategory,categoryDelete,
-    categoryEdit
+    categoryEdit,categoryInstockStatus,categoryOutstockStatus
 };

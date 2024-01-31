@@ -31,6 +31,11 @@
       <!-- ============================================================== -->
       <!-- Start Page Content -->
       <!-- ============================================================== -->
+      <% if(message.success) { %>
+          <div class="alert alert-success">
+              <%= message.success %>
+          </div>
+      <% } %>
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -53,7 +58,13 @@
                     <tr>
                         <th scope="row"><%= i %></th>
                         <td><%= cate.category_name %></td>
-                        <td></td>
+                        <td>
+                          <% if(cate.status === 1) { %>
+                            <a href="/categoryInstockStatus?id=<%= cate.id %>" class="btn btn-success btn-sm">Instock</a>
+                          <% } else { %>
+                          <a href="/categoryOutstockStatus?id=<%= cate.id %>" class="btn btn-warning btn-sm">Outstock</a>
+                          <% } %>
+                        </td>
                         <td>
                             <a href="/deletecategory/<%= cate.id %>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             <a href="/editcategory?id=<%= cate.id %>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>

@@ -66,6 +66,14 @@
                 ><img src="../assets/images/logo.png" alt="logo"
               /></span>
             </div>
+
+            <% if(message.success) { %>
+              <div class="alert alert-success">
+                <%= message.success %>
+              </div>
+            <% } %>
+            
+
             <!-- Form -->
             <form method="post" class="form-horizontal mt-3" action="/registerUser">
               <div class="row pb-4">
